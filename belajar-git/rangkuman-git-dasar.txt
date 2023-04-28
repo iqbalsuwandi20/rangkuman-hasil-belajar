@@ -1,0 +1,72 @@
+GIT DASAR
+
+Configuration:
+git config --global user.name ("username")	: mengisi username git kita
+git config --global user.email ("email") 		: mengisi email git kita
+git config --global core.editor "code --wait" 	: untuk menjadikan vsc editor git
+git config --list --show-origin			: melihat seluruh konfigurasi yg sudah dibuat
+
+Repository:
+git init 							: untuk membuat project kita terhubung dengan git (masuk ke dalam folder di terminal)
+git status							: mengecek apa saja yg terjadi di project kita
+
+Hash:
+HEAD								: akhir dari hash	atau pengganti kata hash yang paling terakhir di buat
+
+Menambah File:
+git add (namafile)					: menambahkan file (file tsb masuk ke dalam staging index)
+git add .							: menambahkan file secara keseluruhan (file tsb masuk ke dalam staging index)
+git commit -m "pesan yg dibuat"			: menambahkan kedalam repository dan ada pesannya (file tsb masuk ke dalam local repository)
+
+Mengubah File:
+git diff							: melihat status perubahan file yg sudah di edit atau di tambah (masih di dalam working directory)
+
+Membatalkan Perubahan:
+git clean -f						: semua file baru akan dihapus (masi di dalam working directory)
+git restore (namafile)					: membatalkan perubahan file yang telah kita lakukan (masi di dalam working directory)
+git restore (namafile)					: membatalkan penghapusan file yang telah kita lakukan (masi di dalam working directory)
+git restore --staged (namafile)			: mengembalikan staging index ke working directory
+
+Commit Log:
+git log							: melihat riyawat commit yang sudah kita lakukan (file harus sudah di commit masuk ke dalam local repository)
+git log --oneline						: riyawat commit menjadi satu baris (file harus sudah di commit masuk ke dalam local repository)
+git log --oneline --graph				: melihat riyawat commit log dengan commit log sebelumnya (tampil dalam bentuk grafik)
+git show (hash atau bisa pakai HEAD)		: melihat secara detail commit yang sudah dilakukan (HEAD = perubahan commit terakhir)
+
+Compare Commit:
+git diff (hash1 hash2)					: melihat perbedaan antara 2 commit (harus sudah ada di local repository)
+git difftool (hash1 hash2) 				: melihat perbedaan antara 2 commit menggunakan vsc (harus sudah di konfigurasi di awal dan lakukan di terminal) 
+
+Rename File:
+git add (nama file) lalu git add (new nama file): akan dijadikan rename oleh git
+
+Reset Commit:
+git reset (--modenya) (hash)				: reset commit lalu menggeser head nya
+mode	
+soft 								: memindahkan head, perubahan berada di staging index (jika ingin kembali ke head, jangan lakukan commit baru & pakai hash yg lama)
+mixed								: memindahlan head, perubahan berada di working directory (jika ingin kembali ke head, jangan lakukan commit baru & pakai hash yg lama)
+hard								: memindahkan head, perubahan semua di reset tidak ada (jika ingin kembali ke head, jangan lakukan commit baru & pakai hash yg lama)
+
+Amend Commit:
+git commit --amend -m "pesan"				: merge 1 commit/hash dengan commit sebelumnya (amend akan mengubah has commit karena data perubahan di commit bertambah atau berubah dan dilakukan setelah file berada di staging index)
+
+Versi Sebelumnya:
+git checkout (hash) -- (namafile)			: melihat sebuah file di commit yang dulu isinya seperti apa (sudah dalam local repository)
+
+Snapshot Sebelumnya:
+git checkout (hash)					: kembali ke versi snapshot sebelumnya (sudah dalam local repository)
+git checkout (namabranch)				: jika ingin kembali ke head (sudah dalam local repository)
+git branch --show-current				: melihat branch saat ini
+
+Revert Commit:
+git revert (hash)						: melakukan pembatalan commit dan di buatkan commit terbaru (sudah dalam local repository)
+
+Ignore
+.gitignore (dibuat menjadi folder)			: file, folder, extension tidak di masukan kedalam repository
+
+Blame
+git blame (namafile)					: mencari tahu siapa yg menambah perubahan pada file secara autornya
+
+Alias
+git config --global alias.<alias ingin diganti> (kata perintahnya/jika lebih dari 1 kata menggunakan "") : menambah alias atau mengganti kata sesuai kita
+	

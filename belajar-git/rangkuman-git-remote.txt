@@ -1,0 +1,82 @@
+GIT REMOTE
+
+Git Server Repository:
+repository name 								: nama repository kita di git server (boleh huruf besar tapi tidak boleh ada spasi)
+description									: deskripsi dari repository yang ingin dibuat (boleh menggunakan spasi)
+
+SSH:
+ssh-keygen									: untuk membuat SSH key (buat di terminal git bash bukan di cmd biasa)
+new SSH keys								: ada di dalam github
+title										: masukan bebas (contoh laptop pribadi)
+key										: key id_rsa.pub (buka diterminal lalu gunakan perintah cat id_rsa.pub dan copas pindah kan key)
+ssh -T @github.com							: test SSH apakah sudah nyambung dengan server (lakukan di terminal)
+
+Remote Repository:
+git remote add origin (sshurl)					: menambah remote repository (melakukan git init terlebih dahulu lalu commit ke dalam local repository, dan terakhir menambah remote repository)
+git remote									: melihat remote repository (masuk kedalam cd yang sudah ditambah remote repositorynya)
+git remote get-url (namaremote)					: melihat remote secara detail (masuk kedalam cd yang sudah ditambah remote repositorynya)
+git remote rm (namaremote) 						: menghapus remote repository (masuk kedalam cd yang sudah ditambah remote repositorynya)
+
+Push:
+git push (namaremote) (namabranch) 					: mengirim  ke remote repository dan langsung membuat nama branchnya (harus sudah di dalam local repository dan menggunakan nama local branch)
+git push (namaremote) (namabranch):(namaremotebranch) 	: mengirim  ke remote repository dengan nama branch dan sekaligus membuat remote branch baru (harus sudah di dalam local repository dan menggunakan nama local branch, hanya membuat remote branch tidak di local branch)
+git push origin --all 							: push semua ke remote repository dan langsung ke semua branch (harus sudah di dalam local repository, otomatis membuat remote repository)
+git push --delete (namaremote) (namabranch) 			: menghapus branch remote repository
+
+Clone:
+git clone (urlremoterepository) 					: mendownload remote repository ke local repository
+git clone (urlremoterepository) (namafolder)	 		: mendownload remote repository ke local repository dan membuat nama folder yang berbeda dengan remotenya
+
+Remote Branch:
+git branch -r 								: melihat semua daftar branch yang ada di remote repository
+git branch -a								: melihat semua daftar branch yang ada di remote repository dan local repository
+git checkout -b (localbranch) (namaremote)/(remotebranch)	: membuat local branch dari remote repository (hasil dari local branch tersebut akan sama dengan di remote repository)
+
+Fetch:
+git fetch (namaremote) 							: mengambil perubahan di branch hanya di remote repository tidak masuk di local repository (lakukan commit dan push ke remote repository, lalu lakukan fetch tapi tidak masuk kedalam local branch perubahan datanya)
+git fetch (namaremote) (remotebranch)				: mengambik perubahan di branch tertentu hanya di remote repository tidak masuk di local repository (lakukan commit dan push ke remote repository, lalu lakukan fetch tapi tidak masuk kedalam local branch perubahan datanya)
+
+Pull:
+git pull (namaremote) (namaremotebranch)				: mengambil semua perubahan datanya di local repository dan remote repository (lakukan dimana lokasi branch yang ingin di pull dari remote repository)
+git diff (namabranch)..origin/(namaremotebranch)		: melakukan perbandingan dengan local repository dan remote repository
+
+Tag:
+git push (namaremote) (namatag) 					: mengirim tag ke remote repository (lakukan commit ke local repository lalu membuat tag)
+git push (namaremote) --tags						: mengirim semua tag ke remote repository (lakukan commit ke local repository lalu membuat tag)
+git fetch (namaremote) (namatag)					: mengambil tag dari remote repository
+git fetch (namaremote)							: mengambil semua tag dari remote repository 
+git push --delete (namaremote) (namatag)				: menghapus tag di remote repository (hapus terlebih dahulu di local repository)
+
+Pull Request:
+membuat branch baru dari branch utama
+menambah file lalu push ke local repository dan remote repository
+buka repository di github, pilih pull request
+pilih new pull request, pilih mau di merge kemana dan dari branch mana
+pilih create pull request, masukan nama pull request lalu pilih create pull request
+jika ada udpdate:
+push ke local repository dan remote repository
+jika refresh di github ada 2 commit yang masuk dan bisa di cek di file changed ada perbedaan
+jika sudah oke, pada bagian conversation pilih merge pull request lalu confirm merge, sekarang 2 branch sudah di merge
+file tersebut masih di dalam remote repository, silahkan di pull pada branch tersebut
+
+Merge Conflict:
+lakukan edit file lalu push ke local repository dan remote repository
+lalu membuat branch baru dari branch utama, lalu edit pada bagian file yg sama dan push ke local repository dan remote repository ke branch yang sudah dibuat
+lalu pilih pull request dan pilih new pull request
+pilih merge branch utama dari branch yang sudah dibuat tadi lalu muncul tanda merah
+pilih create pull request masukan namanya dan langsung pilih create pull request
+muncul notif conflict dan tidak bisa di merge pull request
+pada bagian branch utama lakukan fetch untuk mendapatkan perubahan
+git merge (namaremote)/(localbranch)				: menggabungkan dari remote repository ke localbranch (harus melakukan fetct terlebih dahulu)
+lalu jika sudah di push ke local repository dan remote repository dan sudah tidak conflict lagi
+silahkan pada bagian conversation pilih merge pull request lalu confirm merge, sekarang 2 branch sudah di merge
+
+Submodule:
+git submodule add (urlgitrepository) (namafolderbaru)		: menambahkan file dari repository lain  (buat project awalan lalu commit dan push ke local dan remote, lalu push ke local dan remote, project tersebut default branchnya adalah branch utama)
+git submodule update --remote (namafolder)			: jika terjadi perubahan di submodule
+git submodule update --remote 					: jika ingin semua submodule di update
+git submodule init							: perintah init untuk mengaktifkan modulenya
+git submodule set-branch--branch (namabranch) (namafolder)	: mengubah branch submodule
+
+Fork:
+
