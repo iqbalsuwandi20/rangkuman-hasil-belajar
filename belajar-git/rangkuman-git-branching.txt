@@ -3,13 +3,13 @@ GIT BRANCHING
 Branch:
 git branch --show-current			: melihat branch saat ini
 git branch (namabranchbaru)			: membuat branch baru (jika buat di master maka dia akan bercabang dari branch master)
-git branch						: melihat semua branch yg sudah dibuat
+git branch						    : melihat semua branch yg sudah dibuat
 git branch --list					: melihat semua branch yg sudah dibuat
 git switch (namabranch)				: pindah ke branch lain
 git checkout (namabranch)			: pindah ke branch lain
-git branch -m (newnamabranch)			: rename nama branch (harus masuk ke dalam branch yg ingin di rename)
+git branch -m (newnamabranch)		: rename nama branch (harus masuk ke dalam branch yg ingin di rename)
 git branch -d (nama branch)			: menghapus branch (harus keluar dari branch yg ingin di hapus)
-git branch --delete (nama branch)		: menghapus branch (harus keluar dari branch yg ingin di hapus)
+git branch --delete (nama branch)	: menghapus branch (harus keluar dari branch yg ingin di hapus)
 
 Merge:
 git merge (namabranch)				: menggabungkan hasil dari 2 branch (pindah ke branch dimana lokasi merge akan dilakukan)
@@ -22,19 +22,19 @@ git cherry-pick (hash)				: memilih commit yang akan dimerge pada branch saat in
 
 Tag
 git tag (namatag) (hash)			: mengganti hash dengan tag (sudah masuk ke dalam local repository)
-git tag --list 					: menampilkan tag yg sudah dibuat
-git tag -l						: menampilkan tag yg sudah dibuat
+git tag --list 					    : menampilkan tag yg sudah dibuat
+git tag -l						    : menampilkan tag yg sudah dibuat
 git checkout (namatag)				: melihat versi sebelumnya menggunakan tagname
 git tag -d (namatag)				: menghapus tag yang sudah dibuat (sudah masuk ke dalam local repository)
 git tag --delete (namatag)			: menghapus tag yang sudah dibuat (sudah masuk ke dalam local repository)
 
 Stash
-git stash push -m ("pesanstash")		: menyimpan kode ke local agar tidak conflict (code masi berada di working directory atau staging index)
-git stash list					: melihat semua stash (harus masuk kedalam branch yg di stash)
+git stash push -m ("pesanstash")	: menyimpan kode ke local agar tidak conflict (code masi berada di working directory atau staging index)
+git stash list					    : melihat semua stash (harus masuk kedalam branch yg di stash)
 git stash show (stashId)			: melihat perubahan yg terjadi di stash (harus masuk kedalam branch yg di stash)
 git stash apply (stashId)			: mengambil perubahan stash (harus masuk kedalam branch yg di stash dan code masuk ke working directory)
 git stash drop (stashId)			: menghapus stash (harus masuk kedalam branch yg di stash)
-git stash clear					: menghapus semua stash	(harus masuk kedalam branch yg di stash)
+git stash clear					    : menghapus semua stash	(harus masuk kedalam branch yg di stash)
 
 Rebase
 git rebase (namabranch)				: mengubah ulang hash headnya dan graph nya menjadi lurus tidak bercabang (harus berada di dalam branch yang ingin di rebase)
