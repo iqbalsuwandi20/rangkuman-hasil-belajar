@@ -1,0 +1,30 @@
+DATABASE MYSQL DASAR
+
+show databases;				        = melihat semua database di MySQL
+create database (nama_database);	= membuat database baru
+drop database (nama_database);	    = menghapus database yang sudah dibuat
+use (nama_database);			    = masuk ke dalam database yang sudah dibuat
+show engines;				        = melihat storage engines pengolahan data
+show tables;				        = melihat isi tabel di dalam database (harus use (nama_database) terlebih dahulu)
+
+cara membuat tabel =
+CREATE TABLE (namatable)
+(
+    kode INT,
+    nama VARCHAR(jumlahchar),
+    harga INT,
+    jumah INT
+) ENGINE - InnoDB;
+
+describe (namatable);               = melihat isi table yang sudah dibuat
+show create table (namatable);      = melihat struktur isi table yang sudah dibuat
+ALTER TABLE (namatable);            = cara mengubah isi table yang sudah dibuat 
+current_timestamp                   = defaultnya adalah waktu saat ini
+TRUNCATE (namatable);               = membuat ulang atau menghapus isi dari table
+DROP TABLE (namatable);             = menghapus table secara permanen
+INSERT INTO                         = memasukkan data ke dalam table
+SELECT * FROM (namatable);          = melihat isi data yang sudah dibuat
+SELECT (kolom1), (kolom2) FROM (namatable);     = melihat isi data yang sudah dibuat secara perkolom
+PRIMARY KEY (namakolom)             = membuat PRIMARY KEY dari kolom table
+SELECT * FROM products WHERE quantity = 0; = mencari data yang ingin di cari
+
