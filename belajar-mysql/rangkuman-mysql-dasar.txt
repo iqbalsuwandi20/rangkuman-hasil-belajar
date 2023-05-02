@@ -1,30 +1,132 @@
 DATABASE MYSQL DASAR
 
-show databases;				        = melihat semua database di MySQL
-create database (nama_database);	= membuat database baru
-drop database (nama_database);	    = menghapus database yang sudah dibuat
-use (nama_database);			    = masuk ke dalam database yang sudah dibuat
-show engines;				        = melihat storage engines pengolahan data
-show tables;				        = melihat isi tabel di dalam database (harus use (nama_database) terlebih dahulu)
+contoh nama database adalah belajar_mysql
 
-cara membuat tabel =
-CREATE TABLE (namatable)
+create database belajar_mysql;  = cara membuat database baru
+show databases;                 = cara melihat database yang sudah dibuat
+drop database belajar_mysql;    = cara menghapus database yang sudah dibuat (table juga hilang)
+use belajar_mysql;              = cara masuk ke dalam database
+
+tipe data number ada 2 yaitu int dan floating point
+
+tipe data string ada 2 yaitu char dan varchar 
+
+SHOW ENGINES;                   = cara melihat daftar storage engines
+SHOW TABLES;                    = cara melihat isi didalam table (harus use database terlebih dahulu)
+
+cara membuat table contoh nama tablenya adalah barang
+
+CREATE TABLE barang
 (
-    kode INT,
-    nama VARCHAR(jumlahchar),
-    harga INT,
-    jumah INT
-) ENGINE - InnoDB;
+    kode INT NOT NULL,
+    nama VARCHAR(100) NOT NULL,
+    harga INT NOT NULL DEFAULT 0,
+    jumah INT NOT NULL DEFAULT 0
+) ENGINE = InnoDB;
+lalu jika ingin melihat tablenya gunakan SHOW TABLES;
+DESC barang;                    = cara melihat isi table yang sudah dibuat
 
-describe (namatable);               = melihat isi table yang sudah dibuat
-show create table (namatable);      = melihat struktur isi table yang sudah dibuat
-ALTER TABLE (namatable);            = cara mengubah isi table yang sudah dibuat 
-current_timestamp                   = defaultnya adalah waktu saat ini
-TRUNCATE (namatable);               = membuat ulang atau menghapus isi dari table
-DROP TABLE (namatable);             = menghapus table secara permanen
-INSERT INTO                         = memasukkan data ke dalam table
-SELECT * FROM (namatable);          = melihat isi data yang sudah dibuat
-SELECT (kolom1), (kolom2) FROM (namatable);     = melihat isi data yang sudah dibuat secara perkolom
-PRIMARY KEY (namakolom)             = membuat PRIMARY KEY dari kolom table
-SELECT * FROM products WHERE quantity = 0; = mencari data yang ingin di cari
+mengubah isi table
+ALTER TABLE barang 
+    ADD COLUMN nama_column TEXT, (menambah)
+    DROP COLUMN nama, (menghapus)
+    RENAME COLUMN nama TO nama_baru, (ganti nama)
+    MODIFY nama VARCHAR(100) AFTER jumah, (mengganti isi table lalu ditaro setelah jumlah)
+    MODIFY nama VARCHAR(100) FIRST; (mengganti isi table dipindahkan ke depan)
+
+ALTER TABLE barang
+MODIFY jumah INT NOT NULL DEFAULT 0;
+
+ALTER TABLE barang
+MODIFY harga INT NOT NULL DEFAULT 0;
+
+ALTER TABLE barang
+ADD waktu_dibuat TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP; (TIMESTAMP untuk waktu, CURRENT_TIMESTAMP untuk waktu saat dibuat)
+
+INSERT INTO barang (kode, nama) VALUES (1, 'Apel'); (menambah value ke dalam table)
+SELECT * FROM barang; (melihat isi value yang sudah di tambah)
+
+TRUNCATE barang; (menghapus value yang didalam table)
+
+DROP TABLE barang; (untuk menghapus table secara permanen)
+
+CREATE TABLE products
+(
+    id          VARCHAR(10) NOT NULL,
+    name        VARCHAR(100) NOT NULL,
+    description TEXT,
+    price       INT UNSIGNED NOT NULL, (UNSIGNED itu tidak boleh negatif)
+    quantity    INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id) (untuk membuat kode unik agar tidak bisa di duplikat)
+) ENGINE = InnoDB;
+
+INSERT INTO (untuk memasukkan data ke dalam table)
+INSERT INTO products(id, name, price, quantity)
+VALUES ('P0001', 'Mie Ayam Original', 15000, 100);
+
+INSERT INTO products(id, name, description, price, quantity)
+VALUES ('P0002', 'Mie Ayam Bakso', 'Mie Ayam Original + Bakso', 20000, 100);
+
+memasukkan data sekaligus
+INSERT INTO products(id, name, price, quantity)
+VALUES ('P0003', 'Mie Ayam Ceker', 20000, 100), 
+('P0004', 'Mie Ayam Spesial', 25000, 100),
+('P0005', 'Mie Ayam Yamin', 15000, 100);
+
+SELECT * FROM products; (bintang artinya mengambil semua data di table)
+SELECT id, name, price, quantity FROM products; (mengambil data tertentu di table)
+
+ALTER TABLE products
+    ADD PRIMARY KEY (id);
+DESC products; (untuk melihat PRIMARY KEY yang sudah dibuat)
+
+WHERE untuk mencari data
+SELECT id, name, price, quantity
+FROM products
+WHERE quantity = 0;
+
+menambah kolom
+ALTER TABLE products
+    ADD COLUMN category ENUM ('Makanan', 'Minuman', 'Lain-Lain')
+        AFTER name;
+
+mengubah satu kolom menggunakan UPDATE dan SET
+UPDATE products
+SET category = 'Makanan'
+WHERE id = 'P0001';
+
+mengubah beberapa kolom
+UPDATE products
+SET category = 'Makanan',
+    description = 'Mie Ayam Original + Ceker'
+WHERE id = 'P0003';
+
+mengubah dengan value di kolom
+UPDATE products
+SET price = price + 5000
+WHERE id = 'P0004';
+
+menghapus data
+DELETE
+FROM products
+WHERE id = 'P0009';
+
+alias merubah kata kolom kata kuncinya adalah as 
+SELECT 
+id AS 'Kode',
+name AS 'Nama',
+category AS 'Kategori',
+price AS 'Harga',
+quantity AS 'Jumlah'
+FROM products;
+
+alias untuk table
+SELECT 
+p.id AS 'Kode',
+p.name AS 'Nama',
+p.category AS 'Kategori',
+p.price AS 'Harga',
+p.quantity AS 'Jumlah'
+FROM products AS p;
 
