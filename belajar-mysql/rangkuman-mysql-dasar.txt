@@ -477,3 +477,108 @@ SELECT
             JOIN products ON (products.id = wishlist.id_product)
             JOIN customers ON (customers.id = wishlist.id_customer);
 
+membuat table wallet
+CREATE TABLE wallet
+(
+    id          INT NOT NULL AUTO_INCREMENT,
+    id_customer INT NOT NULL,
+    balance     INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (id),
+    UNIQUE KEY  id_customer_unique (id_customer), 
+    FOREIGN KEY fk_wallet_customer (id_customer) REFERENCES customers (id)
+) ENGINE = InnoDB;
+
+INSERT INTO wallet(id_customer)
+VALUES (1), (3);
+
+membuat table category
+CREATE TABLE categories
+(
+    id          VARCHAR(10) NOT NULL,
+    name        VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+DROP TABLE categories;
+
+mengubah table products
+ALTER TABLE products
+    DROP COLUMN category;
+
+ALTER TABLE products
+    ADD COLUMN id_category VARCHAR(10);
+
+ALTER TABLE products
+    ADD CONSTRAINT fk_product_categories
+        FOREIGN KEY (id_category) REFERENCES categories (id);
+
+SELECT * FROM products;
+
+INSERT INTO categories(id, name)
+VALUES('C0001', 'Makanan'),
+('C0002', 'Minuman'),
+('C0003', 'Lain-Lain');
+
+UPDATE products
+SET id_category = 'C0001'
+WHERE id IN(
+    'P0001',
+    'P0002',
+    'P0003',
+    'P0004',
+    'P0005',
+    'P0006',
+    'P00013',
+    'P00014',
+    'P00015'
+);
+
+UPDATE products
+SET id_category = 'C0002'
+WHERE id IN(
+    'P0007',
+    'P0008',
+    'P0009'
+);
+
+UPDATE products
+SET id_category = 'C0003'
+WHERE id IN(
+    'P00010',
+    'P00011',
+    'P00012',
+    'P00016'
+);
+
+SELECT products.id, products.name, categories.name
+FROM products
+JOIN categories ON (categories.id = products.id_category);
+
+membuat table Order 
+CREATE TABLE orders
+(
+    id          INT NOT NULL AUTO_INCREMENT,
+    total       INT NOT NULL,
+    order_date  INT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+membuat table Order details
+CREATE TABLE orders_detail
+(
+    id_product  VARCHAR(10) NOT NULL,
+    id_order    INT         NOT NULL,
+    price       INT         NOT NULL,
+    quantity    INT         NOT NULL,
+    PRIMARY KEY (id_product, id_order)
+) ENGINE = InnoDB;
+
+ALTER TABLE orders_detail
+ADD CONSTRAINT fk_orders_detail_product
+FOREIGN KEY (id_product) REFERENCES products(id);
+
+ALTER TABLE orders_detail
+ADD CONSTRAINT fk_orders_detail_orders
+FOREIGN KEY (id_order) REFERENCES orders(id);
+
+INSERT INTO orders(total) VALUES(50000);
